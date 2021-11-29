@@ -44,6 +44,23 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  desc: {
+    type: String,
+    max : 100
+  },
+  from: {
+    type: String,
+    max : 50
+  },
+  relationship: {
+    type: Number,
+    enum : [1,2,3,4]
+    //1 - Single, 2 - In Relationship, 3 - Married, 4 - Complicated
+  },
+  city:{
+    type: String,
+    max : 50
+  }
 },
 {timestamps: true}
 );
