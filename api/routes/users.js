@@ -65,21 +65,24 @@ router.get("/:id", async (req, res) => {
 
 //FOLLOW A USER
 router.put("/:id/follow", async (req, res) => {
-  if(req.body.userId !== req.params.id){
+  const currentUserId = req.body.requestId;
+  const userId = req.params.id;
+  
+  if(currentUserId !== userId){
     try{
-      const user = await User.findById(req.params.id); //User that we are gonna follow
-      const currentUser = await User.findById(req.body.userId);
+      const user = await User.findById(userId); //User that we are gonna follow
+      const currentUser = await User.findById(currentUserId);
       
-      if(!user.followers.includes(req.body.userId)){
-        await user.updateOne({$push :{ followers : req.body.userId } } );
-        await currentUser.updateOne({$push :{ following : req.body.userId } } );
+      if(!user.followers.includes(currentUserId)){
+        await user.updateOne({$push :{ followers : currentUserId } } );
+        await currentUser.updateOne({$push :{ following : userId } } );
         res.status(200).json("User has been followed");
       }
       else{
         res.status(403).json("You already follow this user");
       }
     }
-    catch{
+    catch(err){
       return res.status(500).json(err);
     }
 
@@ -91,14 +94,14 @@ router.put("/:id/follow", async (req, res) => {
 })
 //UNFOLLOW A USER
 router.put("/:id/unfollow", async (req, res) => {
-  if(req.body.userId !== req.params.id){
+  if(true || req.body.userId !== req.params.id){
     try{
       const user = await User.findById(req.params.id); //User that we are gonna follow
       const currentUser = await User.findById(req.body.userId);
       
       if(user.followers.includes(req.body.userId)){
         await user.updateOne({$pull :{ followers : req.body.userId } } );
-        await currentUser.updateOne({$pull :{ following : req.body.userId } } );
+        await currentUser.updateOne({$pull :{ following : req.params.id } } );
         res.status(200).json("User has been unfollowed");
       }
       else{
@@ -120,3 +123,8 @@ router.put("/:id/unfollow", async (req, res) => {
 
 module.exports = router; //Exporting router for other files to use
 //If I don't export a component, it's not available to other components
+
+/* Things I can add myself
+1. Search for Users using name/email-id
+
+*/
