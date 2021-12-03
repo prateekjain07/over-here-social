@@ -34,7 +34,7 @@
 }
 .searchInput{
     border: none;
-    width: 70%;
+    width: 90%;
 }
 .searchInput:focus{
     outline: none;
