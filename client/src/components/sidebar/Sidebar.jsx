@@ -1,6 +1,7 @@
 import './sidebar.css'
 import { RssFeed, School, Event, WorkOutline, HelpOutline, Bookmark, Group, PlayCircleFilledOutlined, Chat } from '@material-ui/icons';
-
+import {Users} from '../../DummyData';
+import CloseFriend from '../closeFriends/CloseFriend';
 export default function Sidebar() {
     const iconArray = [
         { icon: <RssFeed className='sidebarIcon' />, label: "Feed" },
@@ -37,14 +38,9 @@ export default function Sidebar() {
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
                     {
-                        (new Array(10).fill(0)).map((element, index) => {
-                            return(
-                                <li className="sidebarFriend" key={index}>
-                                    <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImg" />
-                                    <span className="sidebarFriendName">Jane Doe</span>
-                                </li>
-                            );
-                        })
+                        Users.map((u) =>(
+                            <CloseFriend key={u.id} user={u} />
+                        ))
                     }
                 </ul>
             </div>

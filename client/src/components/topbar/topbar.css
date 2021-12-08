@@ -6,6 +6,7 @@
     align-items: center;
     top: 0;
     position: sticky; /*Sticks at its position */
+    z-index: 1000;
 }
 
 .topbarLeft{
