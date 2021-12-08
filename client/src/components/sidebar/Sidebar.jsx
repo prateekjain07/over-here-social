@@ -15,7 +15,8 @@ export default function Sidebar() {
     ]
     // Important piece of code for learning React
     // A good rule of thumb is that elements inside the map() call need keys.
-
+    // Second map function I used is just to create something like <li></li> * 10
+    // PS. map functions NEVER End with ;
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
@@ -35,10 +36,16 @@ export default function Sidebar() {
                 <button className="sidebarButton">Show More</button>
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
-                    <li className="sidebarFriend">
-                        <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImg" />
-                        <span className="sidebarFriendName">Jane Doe</span>
-                    </li>
+                    {
+                        (new Array(10).fill(0)).map((element, index) => {
+                            return(
+                                <li className="sidebarFriend" key={index}>
+                                    <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImg" />
+                                    <span className="sidebarFriendName">Jane Doe</span>
+                                </li>
+                            );
+                        })
+                    }
                 </ul>
             </div>
         </div>
