@@ -11,18 +11,17 @@ import {
     Navigate //Navigate instead of Redirect in new V6
 } from "react-router-dom";
 import { useContext } from "react";
-// import { AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
   
 
 function App() {
-    // const { user } = useContext(AuthContext);
-    let user = true;
+    const { user } = useContext(AuthContext);
     return (
         <Router>
         <Routes>
           <Route exact path="/"
             element = {user ? <Home /> : <Register />}/>
-          <Route path="/login" element = {user ? <Navigate to="/" /> : <Login />}/>
+          <Route path="/login" element = { user ? <Navigate to="/"/> : <Login />}/>
           <Route path="/register" element ={user ? <Navigate to="/" /> : <Register />}/>
           <Route path="/profile/:username" element={<Profile />}/>
         </Routes>
